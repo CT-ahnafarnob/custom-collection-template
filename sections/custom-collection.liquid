@@ -1,0 +1,14 @@
+<section>
+    <h1>{{collection.title}}</h1>
+        <p>
+            {{collection.description}}
+        </p>
+    {% for product in collection.products %}
+     <div class="products-shopwcase">
+           <h2>{{product.title}}</h2>
+           {% if product.description != blank %}
+             <p>{{product.description}}</p> 
+           {% endif %}
+     </div>   
+    {% endfor %}
+</section>
