@@ -1,0 +1,131 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "custom_footer_signup_section_3VYTrj": {
+      "type": "custom-footer-signup-section",
+      "name": "Custom Footer Sign Up",
+      "settings": {
+        "header": "Join the GGBlue Sports Club!",
+        "content": "Get access to new releases, exclusives and sales before anyone else!"
+      }
+    },
+    "custom_footer_list_iKVekG": {
+      "type": "custom-footer-list",
+      "blocks": {
+        "list_KMtxqx": {
+          "type": "list",
+          "settings": {
+            "list_text": "About Us",
+            "url": ""
+          }
+        },
+        "list_QiYaQL": {
+          "type": "list",
+          "settings": {
+            "list_text": "Our Story",
+            "url": ""
+          }
+        },
+        "list_b33Hpa": {
+          "type": "list",
+          "settings": {
+            "list_text": "Size Guide",
+            "url": ""
+          }
+        },
+        "list_NBpnky": {
+          "type": "list",
+          "name": "Gift Cards",
+          "settings": {
+            "list_text": "Gift Cards",
+            "url": ""
+          }
+        },
+        "list_qCBwDL": {
+          "type": "list",
+          "settings": {
+            "list_text": "Returns",
+            "url": ""
+          }
+        },
+        "list_yeJgEJ": {
+          "type": "list",
+          "name": "Shipping",
+          "settings": {
+            "list_text": "Shipping",
+            "url": "shopify://policies/privacy-policy"
+          }
+        },
+        "list_BHUmLQ": {
+          "type": "list",
+          "name": "Contact Us",
+          "settings": {
+            "list_text": "Blog",
+            "url": "shopify://collections/all"
+          }
+        },
+        "list_KxBfCp": {
+          "type": "list",
+          "name": "Privacy Policy",
+          "settings": {
+            "list_text": "Privacy Policy",
+            "url": "shopify://policies/privacy-policy"
+          }
+        },
+        "list_LdgnHz": {
+          "type": "list",
+          "name": "Terms",
+          "settings": {
+            "list_text": "Terms",
+            "url": "shopify://policies/privacy-policy"
+          }
+        }
+      },
+      "block_order": [
+        "list_KMtxqx",
+        "list_QiYaQL",
+        "list_b33Hpa",
+        "list_NBpnky",
+        "list_qCBwDL",
+        "list_yeJgEJ",
+        "list_BHUmLQ",
+        "list_KxBfCp",
+        "list_LdgnHz"
+      ],
+      "name": "Footer Lists",
+      "settings": {}
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "newsletter_enable": false,
+        "newsletter_heading": "Subscribe to our emails",
+        "enable_follow_on_shop": true,
+        "show_social": true,
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "payment_enable": false,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "custom_footer_list_iKVekG",
+    "footer",
+    "custom_footer_signup_section_3VYTrj"
+  ]
+}

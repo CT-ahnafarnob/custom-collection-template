@@ -1,0 +1,140 @@
+{{ 'ggblue.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+    assign text1= section.settings.text1
+    assign text2 = section.settings.text2
+    assign text3 = section.settings.text3
+    assign image1 = section.settings.image1
+    assign image2 = section.settings.image2
+    assign image3 = section.settings.image3
+%}
+<style>
+    .{{section.id}}{
+        margin:auto;
+        padding:20px 0
+    }
+
+    .{{section.id}} .container{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-items: center;
+    }
+   
+    .{{section.id}} ul {
+        text-align: center;
+        list-style: none;
+        justify-items: center;
+    }
+     .{{section.id}} img{
+        text-align: center;
+        justify-items: center;
+        max-width: 800px;
+     }
+     .{{section.id}} h1{
+        font-family: var(--font-montserrat-thin);
+        font-size: 35px;
+        letter-spacing: 1.4px;
+     }
+     @media (max-width:768px){
+         .{{section.id}} .container{
+       grid-template-columns: 1fr;
+    }
+     .{{section.id}} h1{
+        line-height: 0.1px;
+        font-size: 25px;
+     }
+}
+</style>
+
+
+
+<section class="{{section.id}}">
+<div class="container">
+    <div class="first-container">
+        <ul>
+            <li>
+                <h1>{{text1}}</h1>
+            </li>
+            {% if image1 != blank %}
+                <img src="{{ image1 |  image_url: width: 360}}" width="100%" height="auto" alt="Image Tops">
+                {% else %}
+                {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+        </ul>
+    </div>
+      <div class="middle-container">
+        <ul>
+            <li>
+                <h1>{{text2}}</h1>
+            </li>
+            {% if image2 != blank %}
+                <img src="{{ image2 |  image_url: width: 500}}" width="100%" height="auto" alt="Image bottom">
+                {% else %}
+                {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+        </ul>
+    </div>
+      <div class="last-container">
+        <ul>
+            <li>
+                <h1>{{text3}}</h1>
+            </li>
+            {% if image3 != blank %}
+                <img src="{{ image3 |  image_url: width: 500}}" width="100%" height="auto" alt="Image outer">
+                {% else %}
+                {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+        </ul>
+    </div>
+
+</div>
+</section>
+
+
+{% schema %}
+    {
+        "name": "Custom Three Image Banner",
+         "disabled_on": 
+         {
+            "groups": ["header", "footer"]
+         },
+        "settings": [
+            {
+                "type":"text",
+                 "id": "text1",
+                 "label": "First Image Text",
+                 "default":"TOPS"
+                },
+                {
+                "type":"text",
+                 "id": "text2",
+                 "label": "Middle Image Text",
+                 "default":"BOTTOMS"
+                },
+                {
+                "type":"text",
+                 "id": "text3",
+                 "label": "Last Image Text",
+                 "default":"OUTERWEAR"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image1",
+                    "label": "First Image"
+                },{
+                    "type": "image_picker",
+                    "id": "image2",
+                    "label": "Middle Image"
+                },{
+                    "type": "image_picker",
+                    "id": "image3",
+                    "label": "Last Image"
+                }
+        ],
+        "presets": [
+            {
+                 "name": "Custom Three Image Banner"
+            }
+        ]
+    }
+{% endschema %}

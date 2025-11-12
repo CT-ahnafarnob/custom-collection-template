@@ -1,0 +1,172 @@
+{{ 'ggblue.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .{{ section.id }}{
+    width: 100%;
+    height: 40px;
+    /* background-color: #accbe4;  */
+    background:{{section.settings.bgcolor}};
+    padding:{{section.settings.padding}}px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: relative; 
+    box-sizing: border-box;
+  }
+  .{{ section.id }} a{
+    font-family: var(--font-jost);
+    font-size: 15px;
+    letter-spacing: 0.1px;
+    color: {{section.settings.color}};
+    text-decoration:none;
+    display: inline-block; 
+    text-transform: uppercase;
+  }
+  .{{ section.id }} a:hover{
+    text-decoration: underline;
+  }
+  .swiper-slide {
+    text-align: center;
+  }
+  .swiper{
+    position: relative;
+    overflow: hidden;
+    width: 40%;
+  }
+
+  .btn {
+    position: absolute;
+    display: block !important;
+    top: 70% !important;
+    color: #d9dfe4;
+  }
+  .btn:after {
+    font-size: 15px;
+    font-weight: 300;
+  }
+.btn.swiper-button-prev{
+  left: 40rem;
+}
+.btn.swiper-button-next{
+  right: 40rem;
+}
+
+@media (min-width: 768px) and (max-width: 1399px) {
+  .btn.swiper-button-prev {
+    left: 33rem;
+  }
+  .btn.swiper-button-next {
+    right: 33rem;
+  }
+}
+@media (max-width: 767px) {
+ .swiper{
+   width: 75%;
+ }
+.btn.swiper-button-prev{
+  left: 2rem;
+}
+.btn.swiper-button-next{
+  right: 1rem;
+
+}
+.{{ section.id }} a{
+  font-size: 12px;
+  line-height: 15px;
+
+}
+.{{ section.id }}{
+  margin-top:0;
+  padding-top:3px;
+}
+}
+</style>
+
+
+<section class="{{ section.id }}">
+<div class="swiper">
+  <div class="swiper-wrapper">
+    {% for block in section.blocks %}
+    <div class="swiper-slide">
+      <a href="#" class="">{{ block.settings.announcement_text }}</a>
+    </div>
+    {% endfor %}
+  </div>
+  
+</div>
+<div class="btn  swiper-button-prev"></div>
+  <div class="btn swiper-button-next"></div>
+</section>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  });
+</script>
+
+
+
+{% schema %}
+{
+  "name": "Custom Announcement Bar",
+  "limit": 1,
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "color_background",
+      "id": "bgcolor",
+      "label": "Background Color",
+      "default":"#accbe4"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Text Color",
+      "default":"#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Spacing",
+      "min": 0,
+      "max": 30,
+      "unit": "px",
+      "default":10,
+      "step": 1
+    }
+  ],
+  "blocks": [
+    {
+      "type": "Announcement_Item",
+      "name": "Announcement Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "announcement_text",
+          "label": "Announcement Text",
+          "default": "Welcome TO GGBLUE"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Custom Announcement Bar",
+     
+    }
+  ]
+}
+{% endschema %}
+
+

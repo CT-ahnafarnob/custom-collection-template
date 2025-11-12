@@ -1,0 +1,158 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_image_banner_UmKaBD": {
+      "type": "custom-image-banner",
+      "name": "Custom Image Banner",
+      "settings": {
+        "banner1": "shopify://shop_images/hero_desktop.svg",
+        "banner2": "shopify://shop_images/hero_mobile.svg"
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "new-arrivals-ggblue",
+        "products_to_show": 4,
+        "title": "SHOP YOUR NEXT LOOK",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "uppercase",
+        "columns_desktop": 4,
+        "enable_desktop_slider": true,
+        "full_width": true,
+        "show_view_all": true,
+        "view_all_style": "outline",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "none",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 44,
+        "padding_bottom": 36
+      }
+    },
+    "custom_three_image_banner_w3N7GP": {
+      "type": "custom-three-image-banner",
+      "name": "Custom Three Image Banner",
+      "settings": {
+        "text1": "TOPS",
+        "text2": "BOTTOMS",
+        "text3": "OUTERWEAR",
+        "image1": "shopify://shop_images/blueproduct.webp",
+        "image2": "shopify://shop_images/bottom.webp",
+        "image3": "shopify://shop_images/outwear.webp"
+      }
+    },
+    "custom_sqaure_box_wVw7im": {
+      "type": "custom-sqaure-box",
+      "name": "Custom-Box_Shape",
+      "settings": {
+        "left_text": "ICE TECHNICAL FABRIC",
+        "mid_text": "The support you need when you're outside playing your best. UPF 50+, Anti-microbial, Anti-bacterial, Sweat-wicking and more!",
+        "btn_text": "Shop Ice",
+        "btn_link": ""
+      }
+    },
+    "custom_left_image_qKz7ma": {
+      "type": "custom-left-image",
+      "blocks": {
+        "heading_LdwEja": {
+          "type": "heading",
+          "settings": {
+            "heading": "OCEAN BREEZE",
+            "heading_size": "h1"
+          }
+        },
+        "text_eDTqAp": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Elevated designs that empower your game with elegance and ease.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_WDEnp4": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Now",
+            "button_link": "shopify://products/dark-denim-top",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_LdwEja",
+        "text_eDTqAp",
+        "button_WDEnp4"
+      ],
+      "name": "Custom Image Text",
+      "settings": {
+        "image": "shopify://shop_images/hero_banner_2.webp",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "custom_rich_text_Rhyk7m": {
+      "type": "custom-rich-text",
+      "blocks": {
+        "heading_zDKHpE": {
+          "type": "heading",
+          "settings": {
+            "heading": "Luxury Golf & Tennis Sportswear",
+            "heading_size": "h1"
+          }
+        },
+        "text_FpfjUm": {
+          "type": "text",
+          "settings": {
+            "text": "<p>When you pair top quality women’s golf & tennis apparel in stylish silhouettes with high tech fabrics, you’re all set to look and feel your best. At GGBlue, we use the most up-to-date, <a href=\"https://ggblue.com/collections/ice-performance\" title=\"Ice Performance\">technical fabric</a> to create sportswear that leaves you feeling comfortable and equipped – no matter where the day takes you.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_zDKHpE",
+        "text_FpfjUm"
+      ],
+      "name": "Custom Richtext",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "custom_image_banner_UmKaBD",
+    "featured_collection",
+    "custom_three_image_banner_w3N7GP",
+    "custom_sqaure_box_wVw7im",
+    "custom_left_image_qKz7ma",
+    "custom_rich_text_Rhyk7m"
+  ]
+}

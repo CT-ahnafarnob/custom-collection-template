@@ -1,0 +1,54 @@
+{{ 'ggblue.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign banner1 = section.settings.banner1
+  assign banner2 = section.settings.banner2
+%}
+{% comment %}
+  Banner 1
+{% endcomment %}
+<div class="desktop-only">
+  {% if section.settings.banner1 == blank and section.settings.banner2 == blank %} placeholder{% endif %}
+{% if banner1 != blank %}
+  <img src="{{ banner1 | image_url: width: 1200 }}" width="100%" height="auto" alt="Banner 1">
+{% else %}
+  {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+{% endif %}
+</div>
+
+{% comment %}
+  Banner 2
+{% endcomment %}
+<div class="mobile-only">
+  {% if banner2 %}
+    <img src="{{ banner2 | image_url: width: 1200 }}" width="100%" height="auto" alt="Banner 2">
+  {% else %}
+    {{ 'hero-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
+  {% endif %}
+</div>
+{% schema %}
+{
+  "name": "Custom Banner",
+  "class": "custom-banner",
+  "disabled_on": {
+    "groups": ["header","footer"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "banner1",
+      "label": "Banner 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner2",
+      "label": "Banner 2"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Image Banner"
+    }
+  ]
+}
+{% endschema %}

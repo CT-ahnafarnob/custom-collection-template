@@ -1,0 +1,184 @@
+:root {
+  --font-jost: "Jost", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-montserrat-thin: "Montserrat-thin", sans-serif;
+}
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Jost";
+  src: url("https://cdn.shopify.com/s/files/1/0941/8362/0977/files/Jost-Light.woff2?v=1756663309")
+      format("woff2"),
+    url("https://cdn.shopify.com/s/files/1/0941/8362/0977/files/Jost-Light.woff?v=1756663310")
+      format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("https://cdn.shopify.com/s/files/1/0941/8362/0977/files/Montserrat-Bold.woff2?v=1756663310")
+      format("woff2"),
+    url("https://cdn.shopify.com/s/files/1/0941/8362/0977/files/Montserrat-Bold.woff?v=1756663310")
+      format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat-thin";
+  src: url("https://cdn.shopify.com/s/files/1/0941/8362/0977/files/Montserrat-Thin.woff2?v=1756770396")
+      format("woff2"),
+    url("https://cdn.shopify.com/s/files/1/0941/8362/0977/files/Montserrat-Thin.woff?v=1756770397")
+      format("woff");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-montserrat);
+}
+
+p {
+  font-family: var(--font-jost);
+  font-size: 16px;
+  letter-spacing: 0.2px;
+  color: black;
+  line-height: 25.3px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: var(--font-jost);
+  font-size: 14px;
+  letter-spacing: 0.7px;
+}
+
+.custombtn {
+  position: relative;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  width: 110px;
+  height: 45px;
+  padding: 3px 5px;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 0;
+}
+
+.custombtn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: -1;
+  transform: skew(30deg) translateX(-100%);
+  transition: transform 0.5s cubic-bezier(0.33, 0, 0, 1);
+}
+
+.custombtn:hover::before {
+  transform: skew(30deg) translateX(0);
+}
+
+/* Childbutton */
+
+.custombtn.childbutton {
+  position: relative;
+  background-color: transparent;
+  border: 1px solid rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  width: 150px;
+  height: 45px;
+  padding: 10px 10px;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 0;
+}
+
+.custombtn.childbutton::before {
+  background: rgb(232, 231, 231);
+}
+
+.custom-heading {
+  font-family: var(--font-montserrat-thin) !important;
+  letter-spacing: 1.8px;
+  font-size: 42px;
+}
+
+.collection__title.title-wrapper .custom-heading {
+  /* Add your custom styles here. They will now override the default 'title' styles. */
+
+  font-family: var(--font-montserrat-thin) !important;
+  letter-spacing: 1.8px;
+}
+
+p.custom-text {
+  font-family: var(--font-montserrat-thin) !important;
+  font-size: 50px !important;
+  letter-spacing: 0.2px !important;
+}
+
+.mobile-only {
+  display: none;
+}
+
+.section-sections--25734082298225__footer-padding {
+  padding-top: 0 !important;
+  padding-bottom: 20px !important;
+}
+
+.collection-description {
+  border: 1px dotted rgb(88, 196, 239);
+}
+
+@media (max-width: 767px) {
+  .mobile-only {
+    display: block;
+  }
+  .custom-heading {
+    font-size: 22px;
+  }
+  .customtext {
+    font-size: 30px !important;
+  }
+  .custombtn.childbutton {
+    display: inline-block;
+    width: 120px;
+    height: 45px;
+    padding: 12px 10px 10px 15px;
+  }
+  p {
+    font-size: 16px;
+  }
+  a {
+    font-size: 12px;
+  }
+  .section-template--25734082396529__custom_left_image_qKz7ma-padding {
+    padding: 0 !important;
+    margin: 0;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+}
+@media (min-width: 767px) {
+  .desktop-only {
+    display: block;
+  }
+}

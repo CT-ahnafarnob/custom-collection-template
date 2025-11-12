@@ -1,0 +1,121 @@
+{{ 'ggblue.css' | asset_url | stylesheet_tag }}
+
+
+
+<style>
+    .{{section.id}} {
+        background-color: #375d79;
+        width: 95%;
+        margin: auto;
+        padding: 10px 50px 10px 30px;
+        min-height: 100px;
+    }
+    .{{section.id}} .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+    }
+    .{{section.id}} h2{
+        font-family: var(--font-montserrat-thin);
+        font-size: 20px;
+        line-height: 22.6px;
+        letter-spacing: 0.9px;
+        color: white;
+    }
+     .{{section.id}} p{
+        font-size: 19px;
+        line-height: 28.5px;
+        letter-spacing: 0.01px;
+        color: white;
+        width: 90%;
+        
+       
+     }
+   .{{section.id}} .line {
+    width: 1px;                  
+    height: 70px;                
+    background-color: white;     
+    margin-right: 20px;                  
+      
+}
+
+@media (max-width:768px){
+    .{{section.id}} .container {
+        flex-direction: column;     
+        justify-content: flex-start;
+        align-items: flex-start;
+        text-align: left;
+    }
+    .{{section.id}} .line {
+    width: 70px;                  
+    height: 1px;  
+    margin: 0;
+    }
+    .{{section.id}} h2,
+    .{{section.id}} p {
+        width: 100%;
+        text-align: left;
+    }
+}
+
+</style>
+
+<section class="{{section.id}}">
+<div class="container">
+<div class="lefttext">
+    <h2>{{section.settings.left_text}}</h2>
+   
+</div>
+ <div class="line">.</div>
+<div>
+    <p class="para">{{section.settings.mid_text}}</p>
+</div>
+<div class="btn-postion">
+              <button class="custombtn">
+                <a href="{{section.settings.btn_link}}">{{section.settings.btn_text}}</a>
+              </button>
+            </div>
+</div>
+</section>
+
+
+{% schema %}
+    {
+        "name": "Custom-Box_Shape",
+         "disabled_on": {
+         "groups": ["header", "footer"]
+            },
+        "settings": [
+            {
+                "type": "text",
+                "id": "left_text",
+                "label": "Left Text",
+                "default": "ICE TECHNICAL FABRIC"
+            },  
+            {
+                "type": "textarea",
+                "id": "mid_text",
+                "label": "Middle Text",
+                "default": "The support you need when you're outside playing your best. UPF 50+, Anti-microbial, Anti-bacterial, Sweat-wicking and more!"
+            },
+            {
+                "type": "text",
+                "id": "btn_text",
+                "label": "Button Text",
+                "default": "Shop Ice"
+                },
+                {
+                "type": "url",
+                "id": "btn_link",
+                "label": "Button Link"
+                }
+        ],
+        "presets": [
+            {
+                 "name": "Custom-Box_Shape"
+            }
+        ]
+    }
+{% endschema %}

@@ -1,0 +1,100 @@
+<script src="{{ 'custom-footer-list.js' | asset_url }}" defer ></script>
+
+<style>
+  .{{section.id}} a{
+    color: black;
+    font-family: var(--font-jost);
+    font-size: 16px;
+    letter-spacing: 0.7px;
+  }
+  .{{section.id}} a:hover{ text-decoration: underline; }
+
+  .{{section.id}} li{ list-style: none; padding: 5px; }
+
+  .{{section.id}} h3{
+    font-family: var(--font-jost);
+    font-size: 14px;
+    letter-spacing: 0.7px;
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  .footer-list__toggle{
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;   
+    align-items: center;             
+    cursor: pointer;
+    padding: 10px 20px;
+  }
+  .footer-list__icon{ transition: transform 0.3s ease; }
+  .footer-list__toggle[aria-expanded="true"] .footer-list__icon{ transform: rotate(180deg); }
+  .footer-list__icon {
+    display: none;
+  }
+
+  @media (max-width: 768px){
+    .footer-list__items{ display: none; }
+    .footer-list__toggle[aria-expanded="true"] + .footer-list__items{
+      display: block;
+    }
+    .footer-list__icon {
+    display: block;
+  }
+  }
+</style>
+
+<div class="{{section.id}}">
+  <div class="footer-list__group">
+    <button class="footer-list__toggle" aria-expanded="false">
+      <li><h3>SHOP GGBLUE</h3></li>
+      <span class="footer-list__icon">{% render 'icon-arrow' %}</span>
+    </button>
+
+    <div class="footer-list__items">
+      <ul>
+        {% for block in section.blocks %}
+          <li><a href="{{ block.settings.url }}">{{ block.settings.list_text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Footer List",
+  "settings": [],
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+    "blocks": [
+    {
+      "type": "list",
+      "name": "List Items",
+      "settings": [
+        {
+          "type": "text",
+          "id": "list_text",
+          "label": "List Text",
+          "default":"Our Story"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "List URL"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "Footer Lists"
+    }
+  ]
+}
+{% endschema %}
