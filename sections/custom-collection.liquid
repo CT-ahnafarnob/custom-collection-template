@@ -8,6 +8,15 @@
      <!-- FILTER SIDEBAR -->
     <aside class="filter-sidebar">
         
+      <!-- Close Button (mobile only) -->
+        <button class="filter-close-btn" id="filterCloseBtn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+
         <!-- Header with Clear Filters -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
           <h2 style="margin: 0;">Filters</h2>
@@ -15,81 +24,90 @@
           {% if collection.filters.size > 0 %}
             {% assign has_active_filters = false %}
             {% for filter in collection.filters %}
-              {% if filter.active_values.size > 0 %}
+              {% if filter.type == 'price_range' %}
+                {% if filter.min_value.value or filter.max_value.value %}
+                  {% assign has_active_filters = true %}
+                {% endif %}
+              {% elsif filter.active_values.size > 0 %}
                 {% assign has_active_filters = true %}
               {% endif %}
             {% endfor %}
             
-            {% if has_active_filters %}
-              <a href="{{ collection.url }}" style="font-size: 14px; color: #666; text-decoration: underline;">Clear all</a>
-            {% endif %}
+           
           {% endif %}
         </div>
         
       
         <!-- Filter Form -->
-            <form method="get" action="{{ collection.url }}" id="filterForm">
-                
-                {% for filter in collection.filters %}
-                    <div class="filter-group">
-                    <h3>{{ filter.label }}</h3>
-                    
-                    {% if filter.type == 'list' %}
-                        <!-- LIST FILTER (Checkboxes) -->
-                        {% for value in filter.values %}
-                        <div class="filter-option">
-                            <input 
-                            type="checkbox" 
-                            id="Filter-{{ filter.label }}-{{ forloop.index }}"
-                            name="{{ value.param_name }}"
-                            value="{{ value.value }}"
-                            {% if value.active %}checked{% endif %}
-                            >
-                            <label for="Filter-{{ filter.label }}-{{ forloop.index }}">
-                            {{ value.label }} ({{ value.count }})
-                            </label>
-                        </div>
-                        {% endfor %}
-                        
-                    {% elsif filter.type == 'price_range' %}
-                        <!-- PRICE RANGE FILTER -->
-                        <div class="price-inputs">
-                        <div>
-                            <label>From ($)</label>
-                            <input 
-                            type="number" 
-                            name="{{ filter.min_value.param_name }}"
-                            placeholder="0"
-                            min="0"
-                            step="0.01"
-                            {% if filter.min_value.value %}
-                                value="{{ filter.min_value.value | divided_by: 100.0 }}"
-                            {% endif %}
-                            >
-                        </div>
-                        <div>
-                            <label>To ($)</label>
-                            <input 
-                            type="number" 
-                            name="{{ filter.max_value.param_name }}"
-                            placeholder="Max"
-                            min="0"
-                            step="0.01"
-                            {% if filter.max_value.value %}
-                                value="{{ filter.max_value.value | divided_by: 100.0 }}"
-                            {% endif %}
-                            >
-                        </div>
-                        </div>
-                        
-                    {% endif %}
-                    </div>
-                {% endfor %}
-                
-                <button type="submit" style="width: 100%; padding: 12px; background: #000; color: #fff; border: none; cursor: pointer; margin-top: 10px;">Apply Filters</button>
-                
-            </form>
+      <form method="get" action="{{ collection.url }}" id="filterForm">
+    
+      {% for filter in collection.filters %}
+        <div class="filter-group">
+        <h3>{{ filter.label }}</h3>
+        
+        {% if filter.type == 'list' %}
+            <!-- LIST FILTER (Checkboxes) -->
+            {% for value in filter.values %}
+            <div class="filter-option">
+                <input 
+                type="checkbox" 
+                id="Filter-{{ filter.label }}-{{ forloop.index }}"
+                name="{{ value.param_name }}"
+                value="{{ value.value }}"
+                {% if value.active %}checked{% endif %}
+                >
+                <label for="Filter-{{ filter.label }}-{{ forloop.index }}">
+                {{ value.label }} ({{ value.count }})
+                </label>
+            </div>
+            {% endfor %}
+            
+        {% elsif filter.type == 'price_range' %}
+            <!-- PRICE RANGE FILTER -->
+            <div class="price-inputs">
+            <div>
+                <label>From ($)</label>
+                <input 
+                type="number" 
+                name="{{ filter.min_value.param_name }}"
+                placeholder="0"
+                pattern="[0-9]*\.?[0-9]*"
+                inputmode="decimal"
+                {% if filter.min_value.value %}
+                    value="{{ filter.min_value.value | divided_by: 100.0 }}"
+                {% endif %}
+                >
+            </div>
+            <div>
+                <label>To ($)</label>
+                <input 
+                type="number" 
+                name="{{ filter.max_value.param_name }}"
+                placeholder="Max"
+                pattern="[0-9]*\.?[0-9]*"
+                inputmode="decimal"
+                {% if filter.max_value.value %}
+                    value="{{ filter.max_value.value | divided_by: 100.0 }}"
+                {% endif %}
+                >
+            </div>
+            </div>
+            
+        {% endif %}
+        </div>
+    {% endfor %}
+    
+    {% comment %} Clear ALL filter {% endcomment %}
+    
+    {% if has_active_filters %}
+      <div class="clear-all-btn">    
+      <a href="{{ collection.url }}">Clear all Filters</a>
+      </div>
+    {% endif %}
 
+    <button type="submit" style="width: 100%; padding: 12px; background: #000; color: #fff; border: none; cursor: pointer; margin-top: 10px;">Apply Filters</button>
+    
+</form>
 
         <!-- Active Filters Display -->
         {% if has_active_filters %}
@@ -107,7 +125,7 @@
           </div>
         {% endif %}
         
-      </aside>
+    </aside>
       
   </div>
 
@@ -122,7 +140,18 @@
      
       <!-- PRODUCTS AREA -->
       <div class="products-container">
-        <h2>{{collection.title}}</h2>
+        <div class="product-heading-bar">
+
+
+          <div class="title"><h2>{{collection.title}}</h2></div>
+          <div class="filter-icon">
+            <button class="filter-button">
+              {% render 'filter-icon' %} 
+            </button>
+           Filter
+          </div>
+        </div>
+        
         {% paginate collection.products by 12 %}
           
           <div class="products-grid">
@@ -259,7 +288,7 @@
           // Success - change to "Added to Cart"
           this.textContent = 'Added to Cart';
           
-          // Keep disabled for 2 seconds, then reset
+          // Keep disabled for 5 seconds, then reset
           setTimeout(() => {
             this.disabled = false;
             this.textContent = 'Add to Cart';
@@ -286,7 +315,24 @@
   });
 </script>
 
-
+<!-- Filter For Mobile Java Script -->
+<script>
+  const filter = document.querySelector(".filter");
+  const filterIcon = document.querySelector(".filter-icon");
+  
+  if (filterIcon) {
+    filterIcon.addEventListener("click", () => {
+      filter.classList.toggle("filter-open");
+      
+      if (filter.classList.contains("filter-open")) {
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+      } else {
+        document.body.style.overflow = ''; // Restore scrolling
+      }
+    });
+  }
+</script>
+<!-- Filter For Mobile Java Script-End -->
 
 
 <!-- Complete CSS -->
@@ -366,7 +412,32 @@
     padding: 5px;
     border: 1px solid #ddd;
   }
-  
+
+  /* Filter Icon Styling */
+  .product-heading-bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .filter-button {
+    width: 30px;
+    margin-top:22px;
+  }
+
+  .filter-close-btn {
+    display: none;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 10;
+  }
+  .filter-close-btn {
+    display: block;}
+
   /* Products Grid */
   .products-grid {
     display: grid;
@@ -536,7 +607,18 @@
     font-size: 14px;
     color: #666;
   }
-
+  .clear-all-btn  {
+    width: 100%; 
+    padding: 5px; 
+    border: none; 
+    cursor: pointer; 
+    text-align: center;
+  }
+  .clear-all-btn a {
+    font-size: 14px;
+    color: black;
+    font-weight: 400;
+  }
   
   
   /* Responsive */
@@ -553,7 +635,35 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 15px;
     }
+    .filter-and-section {
+      position: relative;
+    }
+    .filter{
+      background: white;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 80%;
+      height: 100vh;
+      max-width: 300px;
+      z-index: 15;
+      transform: translateX(-100%);
+      transition: all 0.5s ease-in-out;
+      width: 80%;
+      overflow-y: auto;
+      padding: 20px;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .filter-open{
+       transform: translateX(0);
+    }
+  
+  
+  
   }
+    
+  
   
   @media (max-width: 480px) {
     .products-grid {
