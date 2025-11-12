@@ -475,38 +475,41 @@
   }
 
   /* Add to Cart Button */
-.add-to-cart-btn {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  margin-top: 15px;
-  background: #000;
-  color: #fff;
-  text-align: center;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  transition: all 0.3s;
-  border-radius: 4px;
-  margin-top: auto;
-}
+    .add-to-cart-btn {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        margin-top: 15px;
+        background: #000;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: all 0.3s;
+        border-radius: 4px;
+        margin-top: auto;
+        line-height: 1;
+        text-transform: none;
+    }
 
-.add-to-cart-btn:hover:not(:disabled) {
-  background: #333;
-  transform: translateY(-2px);
-}
+    .add-to-cart-btn:hover:not(:disabled) {
+        background: #333;
+        transform: translateY(-2px);
+    }
 
-.add-to-cart-btn:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
+    .add-to-cart-btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
 
-.add-to-cart-btn.sold-out {
-  background: #ccc;
-  color: #666;
-}
+    .add-to-cart-btn.sold-out {
+        background: #ccc;
+        color: #666;
+    }
+   
   
   /* Pagination */
   .pagination {
