@@ -7,10 +7,10 @@
 
 
   <div class="filter">
-     <!-- FILTER SIDEBAR -->
+     {% comment %} FILTER SIDEBAR {% endcomment %}
     <aside class="filter-sidebar">
         
-      <!-- Close Button (mobile only) -->
+      {% comment %} Close Button (mobile only) {% endcomment %}
         <button class="filter-close-btn" id="filterCloseBtn">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -19,7 +19,7 @@
         </button>
 
 
-        <!-- Header with Clear Filters -->
+        {% comment %} Header with Clear Filters {% endcomment %}
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
           <h2 style="margin: 0;">Filters</h2>
           
@@ -40,7 +40,7 @@
         </div>
         
       
-        <!-- Filter Form -->
+        {% comment %} Filter Form {% endcomment %}
       <form method="get" action="{{ collection.url }}" id="filterForm">
     
       {% for filter in collection.filters %}
@@ -48,7 +48,7 @@
         <h3>{{ filter.label }}</h3>
         
         {% if filter.type == 'list' %}
-            <!-- LIST FILTER (Checkboxes) -->
+            {% comment %} LIST FILTER (Checkboxes) {% endcomment %}
             {% for value in filter.values %}
             <div class="filter-option">
                 <input 
@@ -65,7 +65,7 @@
             {% endfor %}
             
         {% elsif filter.type == 'price_range' %}
-            <!-- PRICE RANGE FILTER -->
+            {% comment %} PRICE RANGE FILTER {% endcomment %}
             <div class="price-inputs">
             <div>
                 <label>From ($)</label>
@@ -111,7 +111,7 @@
     
 </form>
 
-        <!-- Active Filters Display -->
+        {% comment %} Active Filters Display {% endcomment %}
         {% if has_active_filters %}
           <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
             <h4 style="margin-bottom: 10px; font-size: 14px;">Active Filters:</h4>
@@ -140,7 +140,7 @@
     <div class="collection-wrapper">
       
      
-      <!-- PRODUCTS AREA -->
+      {% comment %} PRODUCTS AREA {% endcomment %}
       <div class="products-container">
         <div class="product-heading-bar">
 
@@ -162,7 +162,7 @@
                 
                 <div class="product-card">
                   
-                  <!-- Product Image -->
+                  {% comment %} Product Image {% endcomment %}
                   <div class="product-image">
                     {% if product.featured_image %}
                       <a href="{{ product.url }}">
@@ -179,34 +179,34 @@
                     {% endif %}
                   </div>
                   
-                  <!-- Product Info -->
+                  {% comment %} Product Info {% endcomment %}
                   <div class="product-info">
                     <h2>
                       <a href="{{ product.url }}">{{ product.title }}</a>
                     </h2>
                     
-                    <!-- Product Price -->
+                    {% comment %} Product Price {% endcomment %}
                     <div class="product-price">
                       {% if product.compare_at_price > product.price %}
-                        <!-- On Sale -->
+                         {% comment %} On Sale  {% endcomment %}
                         <span class="price-sale">{{ product.price | money }}</span>
                         <span class="price-compare">{{ product.compare_at_price | money }}</span>
                       {% else %}
-                        <!-- Regular Price -->
+                        {% comment %} Regular Price {% endcomment %}
                         <span class="price-regular">{{ product.price | money }}</span>
                       {% endif %}
                     </div>
-                    
+                     {% comment %} Product Description  {% endcomment %}
                     {% if product.description != blank %}
                       <p class="product-description">{{ product.description | strip_html | truncate: 100 }}</p> 
                     {% endif %}
                   </div>
 
-                <!-- Quick Add to Cart -->
-             <!-- Add to Cart Button -->
+                {% comment %} Quick Add to Cart {% endcomment %}
+             {% comment %} Add to Cart Button {% endcomment %}
                 {% if product.available %}
                 {% if product.has_only_default_variant %}
-                    <!-- Single variant - quick add -->
+                    {% comment %} Single variant - quick add {% endcomment %}
                     <button 
                     class="add-to-cart-btn"
                     data-variant-id="{{ product.selected_or_first_available_variant.id }}"
@@ -215,13 +215,13 @@
                     Add to Cart
                     </button>
                 {% else %}
-                    <!-- Multiple variants - go to product page -->
+                    {% comment %} Multiple variants - go to product page {% endcomment %}
                     <a href="{{ product.url }}" class="add-to-cart-btn add-to-cart-link">
                     Select Variant
                     </a>
                 {% endif %}
                 {% else %}
-                <!-- Sold out -->
+                {% comment %} Sold out {% endcomment %}
                 <button class="add-to-cart-btn add-to-cart-sold-out" disabled>
                     Sold Out
                 </button>
