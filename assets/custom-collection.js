@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((cart) => {
         const cartCount = cart.item_count;
 
-        // Update Dawn theme cart count
+        // Update  cart count
         const cartCountBubbles =
           document.querySelectorAll(".cart-count-bubble");
         cartCountBubbles.forEach((bubble) => {
