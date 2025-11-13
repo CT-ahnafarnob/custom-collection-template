@@ -74,6 +74,21 @@
   border: 1px solid #ddd;
 }
 
+/* sort- filter */
+.sort-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.sort-select:focus {
+  outline: none;
+  border-color: #000;
+}
 /* Filter Icon Styling */
 .filter-icon {
   display: none;
