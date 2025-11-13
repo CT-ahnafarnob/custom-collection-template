@@ -103,3 +103,26 @@ if (filterCloseBtn) {
     document.body.style.overflow = ""; // Restore scrolling
   });
 }
+
+// Auto Submit Filter
+document.addEventListener("DOMContentLoaded", function () {
+  const filterForm = document.getElementById("filterForm");
+
+  if (filterForm) {
+    // Auto-submit on checkbox change
+    const checkboxes = filterForm.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", function () {
+        filterForm.submit();
+      });
+    });
+
+    // Auto-submit on sort change
+    const sortSelect = filterForm.querySelector(".sort-select");
+    if (sortSelect) {
+      sortSelect.addEventListener("change", function () {
+        filterForm.submit();
+      });
+    }
+  }
+});
