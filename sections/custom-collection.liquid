@@ -5,7 +5,18 @@
 {{ 'custom-collection.css' | asset_url | stylesheet_tag }}
 
 <section class="custom-page-width">
-
+ {% comment %} All colelction showcase {% endcomment %}
+        <div class="all-collection-title">
+          <ul class="all-collection-title__list">
+            {% for collection in collections limit:10 %}
+              <li> 
+                <a href="{{collection.url}}">
+                  <h4>{{collection.title}}</h4>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+    </div>
 
   <div class="filter-and-section">
 
@@ -184,15 +195,18 @@
 
   {% comment %} Main Section {% endcomment %}
   <div class="section">
+
+    {% comment %} Collection Title  {% endcomment %}
     <div class="section-heading"><h3>{{collection.title}}</h3>
     <p>{{collection.description}}</p></div>
- 
-    
+
     <div class="collection-wrapper">
       
      
       {% comment %} PRODUCTS AREA {% endcomment %}
       <div class="products-container">
+        
+
         <div class="product-heading-bar">
 
           {% comment %} Filter Button {% endcomment %}

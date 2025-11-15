@@ -1,0 +1,218 @@
+@charset 'UTF-8';
+.slick-loading .slick-list {
+  background: #fff url(ajax-loader.gif) center center no-repeat;
+}
+@font-face {
+  font-family: slick;
+  font-weight: 400;
+  font-style: normal;
+  src: url(fonts/slick.eot);
+  src: url(fonts/slick.eot?#iefix) format("embedded-opentype"),
+    url(fonts/slick.woff) format("woff"),
+    url(fonts/slick.ttf) format("truetype"),
+    url(fonts/slick.svg#slick) format("svg");
+}
+.slick-next,
+.slick-prev {
+  font-size: 0;
+  line-height: 0;
+  position: absolute;
+  top: 40%;
+  display: block;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  -webkit-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  cursor: pointer;
+  color: transparent;
+  border: none;
+  outline: 0;
+  background: 0 0;
+}
+.slick-next:focus,
+.slick-next:hover,
+.slick-prev:focus,
+.slick-prev:hover {
+  color: transparent;
+  outline: 0;
+  background: 0 0;
+}
+.slick-next:focus:before,
+.slick-next:hover:before,
+.slick-prev:focus:before,
+.slick-prev:hover:before {
+  opacity: 1;
+}
+.slick-next.slick-disabled:before,
+.slick-prev.slick-disabled:before {
+  opacity: 0.25;
+}
+.slick-next:before,
+.slick-prev:before {
+  font-family: slick;
+  font-size: 20px;
+  line-height: 1;
+  opacity: 0.75;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.slick-prev {
+  left: -25px;
+}
+[dir="rtl"] .slick-prev {
+  right: -25px;
+  left: auto;
+}
+.slick-prev:before {
+  content: "←";
+}
+[dir="rtl"] .slick-prev:before {
+  content: "→";
+}
+.slick-next {
+  right: -25px;
+}
+[dir="rtl"] .slick-next {
+  right: auto;
+  left: -25px;
+}
+.slick-next:before {
+  content: "→";
+}
+[dir="rtl"] .slick-next:before {
+  content: "←";
+}
+.slick-dotted.slick-slider {
+  margin-bottom: 30px;
+}
+.slick-dots {
+  position: absolute;
+  bottom: -25px;
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+}
+.slick-dots li {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+  padding: 0;
+  cursor: pointer;
+}
+.slick-dots li button {
+  font-size: 0;
+  line-height: 0;
+  display: block;
+  width: 20px;
+  height: 20px;
+  padding: 5px;
+  cursor: pointer;
+  color: transparent;
+  border: 0;
+  outline: 0;
+  background: 0 0;
+}
+.slick-dots li button:focus,
+.slick-dots li button:hover {
+  outline: 0;
+}
+.slick-dots li button:focus:before,
+.slick-dots li button:hover:before {
+  opacity: 1;
+}
+.slick-dots li button:before {
+  font-family: slick;
+  font-size: 6px;
+  line-height: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  content: "•";
+  text-align: center;
+  opacity: 0.25;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.slick-dots li.slick-active button:before {
+  opacity: 0.75;
+  color: #000;
+}
+/*# sourceMappingURL=slick-theme.min.css.map */
+
+.slick-prev:before {
+  content: "❮";
+  color: #00342c;
+  font-size: 30px;
+  font-weight: 700;
+  display: none;
+}
+
+.slick-next:before {
+  content: "❯";
+  color: #00342c;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+/* Override Slick defaults */
+.all-collection-title {
+  position: relative;
+}
+
+.slick-next {
+  position: absolute !important;
+  right: -40px !important;
+  top: 35% !important;
+  transform: translateY(-50%) !important;
+  left: auto !important;
+  width: auto !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  border: none !important;
+  z-index: 10 !important;
+  padding: 0 !important;
+}
+
+.slick-next:hover:before,
+.slick-next:focus:before {
+  opacity: 1 !important;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .slick-next {
+    top: 20%;
+    right: -20px !important;
+  }
+
+  .slick-next:before {
+    font-size: 28px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .slick-next {
+    right: 5px !important;
+    position: static !important;
+    transform: none !important;
+    margin-top: 10px !important;
+  }
+
+  .slick-next:before {
+    display: none;
+  }
+}
