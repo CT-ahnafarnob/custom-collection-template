@@ -65,6 +65,7 @@
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
 
       {% for scheme in settings.color_schemes -%}
+        {% assign scheme_classes = '' %}
         {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
         {% if forloop.index == 1 -%}
           :root,
@@ -306,14 +307,7 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
-  
- {{ 'swipper.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'swipper.js' | asset_url }}" defer ></script>
 
-{% comment %} slick {% endcomment %}
- {% comment %} slick.css not exist in asset {% endcomment %}
- {{ 'swipper.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'slick.js' | asset_url }}" defer ></script>
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">

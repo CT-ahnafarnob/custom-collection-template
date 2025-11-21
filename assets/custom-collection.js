@@ -546,41 +546,39 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Collection Title Slider
-document.addEventListener("DOMContentLoaded", function () {
-  $(".all-collection-title__list").slick({
-    dots: false,
-    infinite: true,
-    speed: 900,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    arrows: true,
-    adaptiveHeight: true,
-    prevArrow:
-      '<button type="button" class="slick-prev" style="display: none;"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-    responsive: [
-      {
-        breakpoint: 1100,
-        settings: {
-          slidesToShow: 3,
-          dots: true,
-        },
+$(".all-collection-title__list").slick({
+  dots: false,
+  infinite: true,
+  speed: 900,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  arrows: true,
+  adaptiveHeight: true,
+  prevArrow:
+    '<button type="button" class="slick-prev" style="display: none;"></button>',
+  nextArrow: '<button type="button" class="slick-next"></button>',
+  responsive: [
+    {
+      breakpoint: 1100,
+      settings: {
+        slidesToShow: 3,
+        dots: true,
       },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          arrows: false,
-          dots: true,
-        },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 2,
+        arrows: false,
+        dots: true,
       },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          dots: true,
-        },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        dots: true,
       },
-    ],
-  });
+    },
+  ],
 });
