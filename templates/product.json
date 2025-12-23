@@ -53,6 +53,15 @@
             "show_gift_card_recipient": true
           }
         },
+        "collapsible_tab_anqWnq": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "{{ product.metafields.custom.care_instructions.value.title.value }}",
+            "icon": "none",
+            "content": "{{ product.metafields.custom.care_instructions.value.instructions | metafield_tag }}",
+            "page": ""
+          }
+        },
         "description": {
           "type": "description",
           "settings": {}
@@ -72,6 +81,7 @@
         "text_c4wdNN",
         "quantity_selector",
         "buy_buttons",
+        "collapsible_tab_anqWnq",
         "description",
         "share"
       ],
