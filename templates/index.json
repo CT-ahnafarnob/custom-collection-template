@@ -19,6 +19,25 @@
     },
     "product_list_FYkCzP": {
       "type": "product-list",
+      "blocks": {
+        "heading_niaNTJ": {
+          "type": "heading",
+          "settings": {
+            "heading": "Featured Collection"
+          }
+        },
+        "view_all_PnPBYp": {
+          "type": "view_all",
+          "settings": {
+            "text": "View all",
+            "link": "shopify://collections/all-products"
+          }
+        }
+      },
+      "block_order": [
+        "heading_niaNTJ",
+        "view_all_PnPBYp"
+      ],
       "name": "Product List",
       "settings": {
         "collection": "all-products",
