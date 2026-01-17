@@ -145,6 +145,20 @@
         "padding_top": 40,
         "padding_bottom": 52
       }
+    },
+    "product_list_Un6bpP": {
+      "type": "product-list",
+      "name": "t:names.products_grid",
+      "settings": {
+        "collection": "all-products",
+        "max_products": 4,
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 12,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
     }
   },
   "order": [
@@ -153,6 +167,7 @@
     "custom_three_image_banner_w3N7GP",
     "custom_sqaure_box_wVw7im",
     "custom_left_image_qKz7ma",
-    "custom_rich_text_Rhyk7m"
+    "custom_rich_text_Rhyk7m",
+    "product_list_Un6bpP"
   ]
 }
