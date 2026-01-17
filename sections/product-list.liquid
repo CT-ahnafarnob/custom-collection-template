@@ -40,7 +40,7 @@
       {% endpaginate %}
     {% endif %}
   ];
-  
+ 
   console.log('=== PRODUCT DATA DEBUG ({{ section.id }}) ===');
   console.log('Total products:', allProductsData_{{ safe_id }}.length);
   console.log('Product types found:', [...new Set(allProductsData_{{ safe_id }}.map(p => p.type))]);
@@ -61,25 +61,12 @@
   "
 >
   <div class="section-resource-list__header">
-    {%- for block in section.blocks -%}
-      {%- case block.type -%}
-        {%- when 'heading' -%}
-          {%- if block.settings.heading != blank -%}
-            <h2 class="section-heading" {{ block.shopify_attributes }}>{{ block.settings.heading | escape }}</h2>
-          {%- endif -%}
-        {%- when 'view_all' -%}
-          {%- if block.settings.text != blank and block.settings.link != blank -%}
-            <a href="{{ block.settings.link }}" class="section-view-all btn" {{ block.shopify_attributes }}>
-              {{ block.settings.text | escape }}
-            </a>
-          {%- endif -%}
-      {%- endcase -%}
-    {%- endfor -%}
+    {%- content_for 'block', type: '_product-list-content', id: 'static-header' -%}
   </div>
 
   <!-- PRODUCT FILTER COMPONENT - TOP LEVEL -->
   <script src="{{ 'product-filter.js' | asset_url }}"></script>
-  <product-filter 
+  <product-filter
     id="product-filter-{{ section.id }}"
   ></product-filter>
 
@@ -96,7 +83,7 @@
         setTimeout(initializeFilter_{{ safe_id }}, 100);
       }
     }
-    
+   
     // Start initialization after DOM is ready
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initializeFilter_{{ safe_id }});
@@ -122,7 +109,7 @@
               <a href="{{ product.url }}" class="product-card-link" style="text-decoration: none; color: inherit;">
                 <div class="product-image-container">
                   {% if product.featured_image %}
-                    <img 
+                    <img
                       src="{{ product.featured_image | image_url: width: 300 }}"
                       alt="{{ product.featured_image.alt | escape }}"
                       class="product-image"
@@ -152,7 +139,7 @@
               <a href="{{ product.url }}" class="product-card-link" style="text-decoration: none; color: inherit;">
                 <div class="product-image-container">
                   {% if product.featured_image %}
-                    <img 
+                    <img
                       src="{{ product.featured_image | image_url: width: 300 }}"
                       alt="{{ product.featured_image.alt | escape }}"
                       class="product-image"
@@ -275,7 +262,7 @@
       .product-info {
         padding: 12px;
       }
-      
+     
       .product-title {
         font-size: 14px;
       }
@@ -326,31 +313,8 @@
       min-width: 100px;
       text-align: center;
     }
-
-    .section-resource-list__header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .section-heading {
-      margin: 0;
-      font-size: 24px;
-      font-weight: 600;
-    }
-
-    .section-view-all {
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      color: inherit;
-      border-bottom: 1px solid currentColor;
-    }
   </style>
-  
+ 
   <div class="pagination-container" id="pagination-container-{{ section.id }}" style="display: none;">
     <button class="pagination-btn" id="prev-btn-{{ section.id }}" aria-label="Previous Page">←</button>
     <span class="pagination-info" id="pagination-info-{{ section.id }}">Page 1 of 1</span>
@@ -382,11 +346,11 @@
 
       // Initialize - get cards for THIS section only
       allCards = Array.from(document.querySelectorAll('#products-grid-{{ section.id }} .product-card-wrapper'));
-      
+     
       // Function to render current page
       function renderPage() {
         const totalPages = Math.ceil(visibleCards.length / itemsPerPage);
-        
+       
         if (currentPage < 1) currentPage = 1;
         if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
 
@@ -427,7 +391,7 @@
           const productType = card.getAttribute('data-product-type') || '';
           const productTitle = card.getAttribute('data-product-title') || '';
           const productPrice = parseFloat(card.getAttribute('data-product-price')) || 0;
-          
+         
           let matchesCategory = true;
           let matchesSearch = true;
           let matchesPrice = true;
@@ -456,7 +420,7 @@
         console.log('🔍 Filter applied for section {{ section.id }}:', e.detail);
         applyFilter(e.detail);
       });
-      
+     
       productFilter.addEventListener('filter-reset', () => {
         console.log('🔄 Filter reset for section {{ section.id }}');
         visibleCards = [...allCards];
@@ -504,48 +468,17 @@
     class="section-resource-list__content"
     style="--horizontal-alignment: {{ section.settings.horizontal_alignment }};"
   >
-    {%- for block in section.blocks -%}
-      {%- case block.type -%}
-        {%- when '@app' -%}
-          {% render block %}
-      {%- endcase -%}
-    {%- endfor -%}
+    {%- content_for 'blocks' -%}
   </div>
 </div>
 
 {% schema %}
 {
-  "name": "Product List",
+  "name": "product_list",
   "class": "ui-test-product-list",
   "blocks": [
     {
-      "type": "heading",
-      "name": "Heading",
-      "settings": [
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "Heading",
-          "default": "Featured Collection"
-        }
-      ]
-    },
-    {
-      "type": "view_all",
-      "name": "View All Button",
-      "settings": [
-        {
-          "type": "text",
-          "id": "text",
-          "label": "Button Text",
-          "default": "View all"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Link"
-        }
-      ]
+      "type": "@theme"
     },
     {
       "type": "@app"
@@ -567,7 +500,7 @@
     {
       "type": "range",
       "id": "max_products",
-      "label": "Product count",
+      "label": "t:settings.product_count",
       "min": 1,
       "max": 50,
       "step": 1,
@@ -576,15 +509,15 @@
     {
       "type": "select",
       "id": "section_width",
-      "label": "Width",
+      "label": "t:settings.width",
       "options": [
         {
           "value": "page-width",
-          "label": "Page"
+          "label": "t:options.page"
         },
         {
           "value": "full-width",
-          "label": "Full"
+          "label": "t:options.full"
         }
       ],
       "default": "page-width"
@@ -592,19 +525,19 @@
     {
       "type": "select",
       "id": "horizontal_alignment",
-      "label": "Alignment",
+      "label": "t:settings.alignment",
       "options": [
         {
           "value": "flex-start",
-          "label": "Left"
+          "label": "t:options.left"
         },
         {
           "value": "center",
-          "label": "Center"
+          "label": "t:options.center"
         },
         {
           "value": "flex-end",
-          "label": "Right"
+          "label": "t:options.right"
         }
       ],
       "default": "flex-start"
@@ -612,7 +545,7 @@
     {
       "type": "range",
       "id": "gap",
-      "label": "Gap",
+      "label": "t:settings.gap",
       "min": 0,
       "max": 100,
       "step": 1,
@@ -622,17 +555,17 @@
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Color scheme",
+      "label": "t:settings.color_scheme",
       "default": "scheme-1"
     },
     {
       "type": "header",
-      "content": "Padding"
+      "content": "t:content.padding"
     },
     {
       "type": "range",
       "id": "padding-block-start",
-      "label": "Top padding",
+      "label": "t:settings.top",
       "min": 0,
       "max": 100,
       "step": 1,
@@ -642,7 +575,7 @@
     {
       "type": "range",
       "id": "padding-block-end",
-      "label": "Bottom padding",
+      "label": "t:settings.bottom",
       "min": 0,
       "max": 100,
       "step": 1,
@@ -652,8 +585,8 @@
   ],
   "presets": [
     {
-      "name": "Product List",
-      "category": "Products",
+      "name": "products_grid",
+      "category": "t:categories.products",
       "settings": {
         "max_products": 12,
         "section_width": "page-width",
