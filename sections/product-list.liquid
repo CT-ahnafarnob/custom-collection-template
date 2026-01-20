@@ -55,21 +55,42 @@
     padding: 0 20px;
   ">
     
-    <!-- BLOCKS: Header area for collection title and view all button -->
+    <!-- BLOCKS: Header area with flexible layout -->
     {% if section.blocks.size > 0 %}
+      {% assign header_layout = 'horizontal' %}
+      {% assign header_alignment = 'space-between' %}
+      {% assign header_gap = 15 %}
+      
+      {% comment %} Get layout from first block if it has layout settings {% endcomment %}
+      {% for block in section.blocks %}
+        {% if block.type == 'collection_title' and block.settings.layout %}
+          {% assign header_layout = block.settings.layout %}
+        {% endif %}
+        {% if block.type == 'collection_title' and block.settings.alignment %}
+          {% assign header_alignment = block.settings.alignment %}
+        {% endif %}
+        {% if block.type == 'collection_title' and block.settings.gap %}
+          {% assign header_gap = block.settings.gap %}
+        {% endif %}
+      {% endfor %}
+
       <div class="pf-header-{{ section.id }}" style="
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: {% if header_layout == 'vertical' %}column{% else %}row{% endif %};
+        justify-content: {{ header_alignment }};
+        align-items: {% if header_layout == 'vertical' %}flex-start{% else %}center{% endif %};
         margin-bottom: 30px;
         flex-wrap: wrap;
-        gap: 15px;
+        gap: {{ header_gap }}px;
       ">
         {% for block in section.blocks %}
           {% case block.type %}
             
             {% when 'collection_title' %}
-              <div {{ block.shopify_attributes }} style="flex: 1;">
+              <div {{ block.shopify_attributes }} style="
+                {% if header_layout == 'horizontal' %}flex: 1;{% endif %}
+                text-align: {{ block.settings.title_alignment }};
+              ">
                 {% if section.settings.collection %}
                   <h2 style="
                     margin: 0;
@@ -92,7 +113,10 @@
               </div>
 
             {% when 'view_all_button' %}
-              <div {{ block.shopify_attributes }}>
+              <div {{ block.shopify_attributes }} style="
+                text-align: {{ block.settings.button_alignment }};
+                {% if header_layout == 'vertical' %}width: 100%;{% endif %}
+              ">
                 {% if section.settings.collection %}
                   <a href="{{ section.settings.collection.url }}" style="
                     display: inline-flex;
@@ -500,6 +524,85 @@
       "limit": 1,
       "settings": [
         {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "Direction",
+          "options": [
+            {
+              "value": "horizontal",
+              "label": "Horizontal"
+            },
+            {
+              "value": "vertical",
+              "label": "Vertical"
+            }
+          ],
+          "default": "horizontal",
+          "info": "Controls layout direction for all header blocks"
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Header Alignment",
+          "options": [
+            {
+              "value": "flex-start",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "flex-end",
+              "label": "Right"
+            },
+            {
+              "value": "space-between",
+              "label": "Space Between"
+            }
+          ],
+          "default": "space-between"
+        },
+        {
+          "type": "range",
+          "id": "gap",
+          "label": "Gap",
+          "min": 0,
+          "max": 60,
+          "step": 5,
+          "unit": "px",
+          "default": 15
+        },
+        {
+          "type": "header",
+          "content": "Title Settings"
+        },
+        {
+          "type": "select",
+          "id": "title_alignment",
+          "label": "Title Text Alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        },
+        {
           "type": "range",
           "id": "heading_size",
           "label": "Heading Size",
@@ -516,6 +619,35 @@
       "name": "View All Button",
       "limit": 1,
       "settings": [
+        {
+          "type": "header",
+          "content": "Button Position"
+        },
+        {
+          "type": "select",
+          "id": "button_alignment",
+          "label": "Button Alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "right",
+          "info": "Aligns button within its container"
+        },
+        {
+          "type": "header",
+          "content": "Button Text"
+        },
         {
           "type": "text",
           "id": "button_text",
@@ -537,6 +669,10 @@
           "step": 1,
           "unit": "px",
           "default": 14
+        },
+        {
+          "type": "header",
+          "content": "Button Style"
         },
         {
           "type": "range",
@@ -567,6 +703,10 @@
           "step": 1,
           "unit": "px",
           "default": 8
+        },
+        {
+          "type": "header",
+          "content": "Button Colors"
         },
         {
           "type": "color",
