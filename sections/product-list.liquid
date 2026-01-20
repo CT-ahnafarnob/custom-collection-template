@@ -55,8 +55,8 @@
     padding: 0 20px;
   ">
     
-    <!-- Header: Collection Title + View All Button -->
-    {% if section.settings.collection %}
+    <!-- BLOCKS: Header area for collection title and view all button -->
+    {% if section.blocks.size > 0 %}
       <div class="pf-header-{{ section.id }}" style="
         display: flex;
         justify-content: space-between;
@@ -65,35 +65,63 @@
         flex-wrap: wrap;
         gap: 15px;
       ">
-        <h2 style="
-          margin: 0;
-          font-size: 32px;
-          font-weight: 700;
-          color: inherit;
-        ">
-          {{ section.settings.collection.title }}
-        </h2>
-        
-        {% if section.settings.show_view_all %}
-          <a href="{{ section.settings.collection.url }}" style="
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: #000;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s ease;
-          " onmouseover="this.style.background='#333'" onmouseout="this.style.background='#000'">
-            View All
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        {% endif %}
+        {% for block in section.blocks %}
+          {% case block.type %}
+            
+            {% when 'collection_title' %}
+              <div {{ block.shopify_attributes }} style="flex: 1;">
+                {% if section.settings.collection %}
+                  <h2 style="
+                    margin: 0;
+                    font-size: {{ block.settings.heading_size }}px;
+                    font-weight: 700;
+                    color: inherit;
+                  ">
+                    {{ section.settings.collection.title }}
+                  </h2>
+                {% else %}
+                  <h2 style="
+                    margin: 0;
+                    font-size: {{ block.settings.heading_size }}px;
+                    font-weight: 700;
+                    color: #999;
+                  ">
+                    Select a collection
+                  </h2>
+                {% endif %}
+              </div>
+
+            {% when 'view_all_button' %}
+              <div {{ block.shopify_attributes }}>
+                {% if section.settings.collection %}
+                  <a href="{{ section.settings.collection.url }}" style="
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+                    background: {{ block.settings.button_bg_color }};
+                    color: {{ block.settings.button_text_color }};
+                    text-decoration: none;
+                    border-radius: {{ block.settings.button_border_radius }}px;
+                    font-weight: 600;
+                    font-size: {{ block.settings.button_font_size }}px;
+                    transition: all 0.3s ease;
+                    border: {{ block.settings.button_border_width }}px solid {{ block.settings.button_border_color }};
+                  " 
+                  onmouseover="this.style.background='{{ block.settings.button_bg_color_hover }}'; this.style.color='{{ block.settings.button_text_color_hover }}';" 
+                  onmouseout="this.style.background='{{ block.settings.button_bg_color }}'; this.style.color='{{ block.settings.button_text_color }}';">
+                    {{ block.settings.button_text }}
+                    {% if block.settings.show_arrow %}
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    {% endif %}
+                  </a>
+                {% endif %}
+              </div>
+
+          {% endcase %}
+        {% endfor %}
       </div>
     {% endif %}
 
@@ -278,9 +306,6 @@
         }
         .pf-product-title {
           font-size: 14px;
-        }
-        .pf-header-{{ section.id }} h2 {
-          font-size: 24px !important;
         }
       }
       .pf-pagination-container {
@@ -468,6 +493,127 @@
 {% schema %}
 {
   "name": "Product Filter Section",
+  "blocks": [
+    {
+      "type": "collection_title",
+      "name": "Collection Title",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "range",
+          "id": "heading_size",
+          "label": "Heading Size",
+          "min": 16,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "default": 32
+        }
+      ]
+    },
+    {
+      "type": "view_all_button",
+      "name": "View All Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "View All"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_arrow",
+          "label": "Show arrow icon",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "button_font_size",
+          "label": "Font Size",
+          "min": 12,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "button_padding_vertical",
+          "label": "Vertical Padding",
+          "min": 4,
+          "max": 32,
+          "step": 2,
+          "unit": "px",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "button_padding_horizontal",
+          "label": "Horizontal Padding",
+          "min": 8,
+          "max": 48,
+          "step": 2,
+          "unit": "px",
+          "default": 24
+        },
+        {
+          "type": "range",
+          "id": "button_border_radius",
+          "label": "Border Radius",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "default": 8
+        },
+        {
+          "type": "color",
+          "id": "button_bg_color",
+          "label": "Background Color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Text Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "button_bg_color_hover",
+          "label": "Background Color (Hover)",
+          "default": "#333333"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color_hover",
+          "label": "Text Color (Hover)",
+          "default": "#ffffff"
+        },
+        {
+          "type": "range",
+          "id": "button_border_width",
+          "label": "Border Width",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "button_border_color",
+          "label": "Border Color",
+          "default": "#000000"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
   "settings": [
     {
       "type": "header",
@@ -477,12 +623,6 @@
       "type": "collection",
       "id": "collection",
       "label": "Collection"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_view_all",
-      "label": "Show 'View All' button",
-      "default": true
     },
     {
       "type": "header",
